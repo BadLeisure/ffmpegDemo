@@ -104,6 +104,7 @@ int main(int argc, char **argv)
     /* 设置time base ，注意timebase的正确设置，会影响码率的输出, 即是AVFrame的pts需要和codec_ctx->time_base一致*/
 	/*和AVFrame的pts相同，这样不需要做时间戳的转换,编码器的时间戳单位是 1 ms，这样后面pts加的时候就需要加40*/
 	/*如果设置的是{1，25}，那么后面的time_base就需要设置的是+1，代表帧的序号*/
+	//多数情况下，编码器会忽略输入的time_base，而是使用自身格式规定的时间基准输出AVPacket
     codec_ctx->time_base = (AVRational){1, 1000}; 
     codec_ctx->framerate = (AVRational){25, 1};
     /* 设置I帧间隔
